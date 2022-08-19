@@ -10,6 +10,13 @@
       position: relative;
     }
 
+    .filter-table {
+      width: 100%;
+      display: table;
+    }
+    
+    /* removed to tweak styling */
+    /* 
     .scroll-indicator {
       height: 100%;
       position: absolute;
@@ -32,11 +39,21 @@
       position: absolute;
       right: 0;
       width: 5px;
-    }
+    } */
 
     .table-wrapper {
-      overflow-x: auto;
+      /* overflow-x: auto; */
       position: relative;
+    }
+
+    .table-container {
+      padding-bottom: 1000px;
+    }
+
+    #actions-row th{
+      background-color: white;
+      position: sticky;
+      top: 0;
     }
 
     .items-table {
@@ -45,6 +62,15 @@
          problems with scroll indicator mask in Safari. */
       max-width: none;
       position: relative;
+    }
+
+    /* some table styling, making it more compact */
+    .items-table td, .items-table th {
+      padding: 10px;
+    }
+
+    .items-table .view {
+      width: 30px;
     }
 
     /* mask for scroll indicators */
@@ -56,6 +82,11 @@
       position: absolute;
       top: 0;
       width: 100%;
+    }
+
+    .max-width {
+      max-width: 150px;
+      overflow: hidden;
     }
   </style>
 </head>
@@ -109,7 +140,7 @@
           <option value="<%= AttributeDefinition.AttributeName %>" />
         <% } %>
       </datalist>
-      <table class="table table-bordered">
+      <table class="table table-bordered table-responsive filter-table">
         <tbody>
           <tr>
             <th>
@@ -145,7 +176,7 @@
             <th>
               Filter
               <div style="margin-top: 1em">
-                <button id="add-filter" class="btn btn-secondary">Add Filter</button>
+                <button id="add-filter" type="button" class="btn btn-secondary">Add Filter</button>
               </div>
             </th>
             <td>
@@ -153,7 +184,7 @@
                 <tbody>
                   <tr>
                     <td style="width: 95px;">
-                      <button type="button" onclick="removeFilter(this)" class="filter-remove btn btn-danger">Remove</button>
+                      <button type="button" onclick="removeFilter(this, event)" class="filter-remove btn btn-danger">Remove</button>
                     </td>
                     <td style="width: 300px">
                       <input
@@ -188,13 +219,36 @@
         </tbody>
       </table>
       <input id="filters" name="filters" type="hidden" />
-
       <div class="row">
-        <div class="col-md-6">
-          <button type="submit" class="btn btn-primary">Search</button>
+        <div class="col-md-8 form-inline">
+            <label class="form-label">
+            Omitted props:
+              <input id="omit" class="form-control ml-1" name="omit" type="text" value="<%= query.omit || '' %>" />
+            </label>
+            <label class="form-label ml-1">
+            Picked props:
+              <input id="pick" class="form-control ml-1" name="pick" type="text" value="<%= query.pick || '' %>" />
+            </label>
+            <label class="form-label ml-1">
+            Sorted by:
+              <input id="sort" class="form-control ml-1" name="sort" type="text" value="<%= query.sort || '' %>" />
+            </label>
+            <div class="form-check form-check-inline ml-1">
+              <input class="form-check-input sort-direction" type="radio" type="radio" id="asc-radio" name="direction" value="asc" <% if (query.direction !=='desc' ) { %>
+              checked<% } %>>
+              <label class="form-check-label" for="asc-radio">Ascending</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input sort-direction" type="radio" type="radio" id="desc-radio" name="direction" value="desc" <% if
+                (query.direction ==='desc' ) { %>
+              checked<% } %>>
+                <label class="form-check-label" for="desc-radio">Descending</label>
+            </div>
+              
+            <button type="submit" class="btn btn-primary ml-1" accesskey="s">Search</button>
+            <button type="button" id="reset" class="btn btn-secondary ml-1" accesskey="r">Reset</button>
         </div>
-
-        <div class="col-md-6 pagination-container d-none">
+        <div class="col-md-4 pagination-container d-none">
             <nav style="float: right">
               <ul class="pagination" style="margin: 0">
                 <li class="page-item page-item-previous disabled">
@@ -260,6 +314,23 @@
       addFilter()
     })
 
+    document.getElementById('reset').addEventListener('click', (event) => {
+      for (const filterBtn of document.querySelectorAll('#filters-table button.filter-remove')) {
+        removeFilter(filterBtn, {})
+      }
+
+      document.getElementById('omit').value = ''
+      document.getElementById('filters').value = ''
+      document.getElementById('pick').value = ''
+      document.getElementById('sort').value = ''
+      document.querySelector('.sort-direction[value="asc"]').checked = true
+      $('#form button[type="submit"]').trigger('click')
+    })
+    
+    const sortElements = [...document.querySelectorAll('.sort-direction')].map(el => el.addEventListener('click', (event) => {
+       $('#form button[type="submit"]').trigger('click')
+    }))
+  
     function requireIndexFilters () {
       const querySelection = document.querySelector('select[name="queryableSelection"]')
       const option = querySelection.selectedOptions[0]
@@ -365,7 +436,7 @@
       addFilter(rangeKey, values, false, ['=', '<', '<=', '>', '>=', 'BETWEEN', 'begins_with'])
     }
 
-    function removeFilter (node) {
+    function removeFilter (node, event) {
       // prevent removal of the last filter row, instead, just clear it out
       if (document.querySelectorAll('#filters-table tr').length === 1) {
         const filterRow = document.querySelector('#filters-table tr')
@@ -373,6 +444,11 @@
         filterRow.querySelector('.filter-row-value').value = ''
       } else {
         node.closest('tr').remove()
+      }
+
+      // Ctrl click on remove filter button to search right away
+      if (event.ctrlKey) {
+        $('#form button[type="submit"]').trigger('click')
       }
     }
 
@@ -383,37 +459,78 @@
     }
 
     function renderItems(data) {
-      $('#actions-row').append(data.uniqueKeys.map(key => '<td>' + key + '</td>'))
+      $('#actions-row').append(data.uniqueKeys.map(key => '<th>' + key + '</th>'))
+
+      // Add sort by clicking on table headers
+      $('#actions-row th').click((event) => {
+        const sortEl = document.getElementById('sort')
+        const existingVal = sortEl.value
+        sortEl.value = event.target.innerText.trim()
+
+        const [ascRadio, descRadio] = document.querySelectorAll('.sort-direction')
+
+        if(existingVal === sortEl.value) {
+          if (ascRadio.checked) {
+            descRadio.checked = true
+          } else {
+            ascRadio.checked = true
+          }
+        } else {
+          ascRadio.checked = true
+          descRadio.checked = false
+        }
+
+        $('#form button[type="submit"]').trigger('click')
+      })
 
       if (data.Items.length) {
         $('#items-container').append(data.Items.map(item => {
           const viewUrl = '/tables/<%= Table.TableName %>/items/' + encodeURIComponent(Object.values(item.__key).join(','))
-          const rowEl = $('<tr><td><a href="' + viewUrl + '">View</a></td></tr>')
+          const rowEl = $('<tr><td class="view"><a href="' + viewUrl + '">View</a></td></tr>')
 
           for (const column of data.uniqueKeys) {
-            const columnEl = $('<td></td>')
+            const columnEl = $('<td class="max-width"></td>')
 
             const value = item[column]
             let wrapperEl = null
 
-            if (Number.isInteger(value) && value >= 0) {
-              let dateValue
-              try {
-                dateValue = new Date(value).toISOString()
-              } catch (error) {
-                dateValue = error.message
-              }
+            // removed, because we use ISO8601 for dates, not unix timestamps as numbers
+            // if (Number.isInteger(value) && value >= 0) {
+            //   let dateValue
+            //   try {
+            //     dateValue = new Date(value).toISOString()
+            //   } catch (error) {
+            //     dateValue = error.message
+            //   }
 
-              wrapperEl = $('<abbr data-toggle="tooltip" data-placement="top" title="' + dateValue + '"></abbr>')
-            } else {
-              wrapperEl = $('<div class="preformatted"></div>')
-            }
+            //   wrapperEl = $('<abbr class="data-cell" data-toggle="tooltip" data-placement="top" title="' + value + '"></abbr>')
+            // } else {
+            // Add some extra properties to hold data
+            wrapperEl = $('<div class="preformatted data-cell" data-toggle="tooltip" data-placement="top" key="' + column + '" cell-value="' + value + '" title="' + column +': ' + value + '"></div>')
+            // }
 
             rowEl.append(columnEl.append(wrapperEl.append(JSONRender(value))))
           }
 
           return rowEl
         }))
+
+        // Double click on a cell value to add filter for that column and value
+        // searches right away
+        // Press control right away to only add filter without searching
+        $('#items-container .data-cell').dblclick((event) => {
+          addFilter()   
+          
+          const addedFilter = $('#filters-table tr:last')
+          
+          addedFilter.find('.filter-row-key').val(event.currentTarget.getAttribute('key'))
+          addedFilter.find('.filter-row-value').val(event.currentTarget.getAttribute('cell-value'))
+
+
+          if (!event.ctrlKey) {
+            $('#form button[type="submit"]').trigger('click')
+          }
+        })
 
         if (data.pageNum > 1) {
           $('.page-link-previous')
