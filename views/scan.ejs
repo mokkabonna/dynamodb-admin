@@ -88,6 +88,11 @@
       max-width: 150px;
       overflow: hidden;
     }
+
+    .data-cell.date.future {
+      background-color:lightgreen;
+    }
+
   </style>
 </head>
 <body class="container-fluid">
@@ -486,7 +491,7 @@
       if (data.Items.length) {
         $('#items-container').append(data.Items.map(item => {
           const viewUrl = '/tables/<%= Table.TableName %>/items/' + encodeURIComponent(Object.values(item.__key).join(','))
-          const rowEl = $('<tr><td class="view"><a href="' + viewUrl + '">View</a></td></tr>')
+          const rowEl = $(`<tr><td class="view"><a href="${viewUrl}">View</a> <button type="button" data-entity-url="${viewUrl}" class="delete-item btn btn-danger">DELETE</button></td></tr>`)
 
           for (const column of data.uniqueKeys) {
             const columnEl = $('<td class="max-width"></td>')
@@ -506,7 +511,24 @@
             //   wrapperEl = $('<abbr class="data-cell" data-toggle="tooltip" data-placement="top" title="' + value + '"></abbr>')
             // } else {
             // Add some extra properties to hold data
-            wrapperEl = $('<div class="preformatted data-cell" data-toggle="tooltip" data-placement="top" key="' + column + '" cell-value="' + value + '" title="' + column +': ' + value + '"></div>')
+
+
+            // mark values containing date with that class and add class if that date is in the future
+            const ISO8601_REGEX = /(\d{4}-\d\d-\d\d)(T\d\d:\d\d:\d\d\.\d\d\dZ$)?/;
+            const dateMatches = ISO8601_REGEX.exec(value)
+            let dateValue = value
+            if (dateMatches) {
+              dateValue = dateMatches[0]
+            }
+
+            const isDate = !!dateMatches
+            const isFuture = new Date(dateValue) > new Date()
+
+            const isDateClass = isDate ? 'date' : ''
+            const isFutureClass = isDate && isFuture ? 'future' : ''
+            const classes = [isDateClass, isFutureClass].join(' ')
+
+            wrapperEl = $(`<div class="preformatted data-cell ${classes}" data-toggle="tooltip" data-placement="top" key="` + column + '" cell-value="' + value + '" title="' + column +': ' + value + '"></div>')
             // }
 
             rowEl.append(columnEl.append(wrapperEl.append(JSONRender(value))))
@@ -514,6 +536,44 @@
 
           return rowEl
         }))
+
+          // copy value
+        $('.delete-item').click((event) => {
+          if (event.ctrlKey) {
+            const entityUrl = event.currentTarget.getAttribute('data-entity-url')
+            fetch(entityUrl, {
+              method: 'delete'
+            }).then((response) => {
+              if (response.ok) {
+                window.location.reload()
+              }
+            }).catch((error) => {
+              console.error(error)
+              alert('There was an error.')
+            })
+          } else {
+            alert('Hold ctrl to delete.')
+          }
+        })
+
+        // copy value
+        // $('#items-container .data-cell').click((event) => {
+        //   if (event.ctrlKey) {
+        //     const cellValue = event.currentTarget.getAttribute('cell-value')
+        //     navigator.clipboard.writeText(cellValue).then(() => {
+
+        //       Notification.requestPermission().then((permission) => {
+        //         // If the user accepts, let's create a notification
+        //         if (permission === "granted") {
+        //             const notification = new Notification(`Copied ${cellValue} to clipboard`);
+        //         }
+        //       });
+              
+        //     }, (err) => {
+        //       alert('failed to write to clipboard')
+        //     })
+        //   }
+        // })
 
         // Double click on a cell value to add filter for that column and value
         // searches right away
