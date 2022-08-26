@@ -276,7 +276,7 @@
     const JSONRender = value => new JSONFormatter.default(value).render()
 
     const form = document.querySelector('#form')
-    form.addEventListener('submit', () => {
+    form.addEventListener('submit', (event, extra) => {
       const filters = {}
 
       document.querySelectorAll('#filters-table tr').forEach((filterRow) => {
@@ -588,6 +588,11 @@
 
 
           if (!event.shiftKey) {
+
+            if (event.altKey) {
+              $('#form').attr("target", "_blank"); 
+            }
+
             $('#form button[type="submit"]').trigger('click')
           }
         })
