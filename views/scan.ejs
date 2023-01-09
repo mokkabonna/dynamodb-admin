@@ -10,6 +10,13 @@
       position: relative;
     }
 
+    .filter-table {
+      width: 100%;
+      display: table;
+    }
+    
+    /* removed to tweak styling */
+    /* 
     .scroll-indicator {
       height: 100%;
       position: absolute;
@@ -32,11 +39,21 @@
       position: absolute;
       right: 0;
       width: 5px;
-    }
+    } */
 
     .table-wrapper {
-      overflow-x: auto;
+      /* overflow-x: auto; */
       position: relative;
+    }
+
+    .table-container {
+      padding-bottom: 1000px;
+    }
+
+    #actions-row th{
+      background-color: white;
+      position: sticky;
+      top: 0;
     }
 
     .items-table {
@@ -45,6 +62,15 @@
          problems with scroll indicator mask in Safari. */
       max-width: none;
       position: relative;
+    }
+
+    /* some table styling, making it more compact */
+    .items-table td, .items-table th {
+      padding: 10px;
+    }
+
+    .items-table .view {
+      width: 30px;
     }
 
     /* mask for scroll indicators */
@@ -57,6 +83,882 @@
       top: 0;
       width: 100%;
     }
+
+    .max-width {
+      max-width: 750px; /* is long enough for ulids */
+      overflow: hidden;
+    }
+
+    .data-cell {
+      padding-left: 1px;
+    }
+
+    .data-cell.date.future {
+      background-color:lightgreen;
+    }
+
+    .data-cell.uniq_val_0 {
+      border-left: solid 15px #ff6666;
+      border-bottom: solid 3px #ff6666;
+    }
+    .data-cell.uniq_val_1 {
+      border-left: solid 15px #009966;
+      border-bottom: solid 3px #009966;
+    }
+    .data-cell.uniq_val_2 {
+      border-left: solid 15px #0000ff;
+      border-bottom: solid 3px #0000ff;
+    }
+    .data-cell.uniq_val_3 {
+      border-left: solid 15px #0066cc;
+      border-bottom: solid 3px #0066cc;
+    }
+    .data-cell.uniq_val_4 {
+      border-left: solid 15px #996699;
+      border-bottom: solid 3px #996699;
+    }
+    .data-cell.uniq_val_5 {
+      border-left: solid 15px #99cc99;
+      border-bottom: solid 3px #99cc99;
+    }
+    .data-cell.uniq_val_6 {
+      border-left: solid 15px #6699cc;
+      border-bottom: solid 3px #6699cc;
+    }
+    .data-cell.uniq_val_7 {
+      border-left: solid 15px #0099cc;
+      border-bottom: solid 3px #0099cc;
+    }
+    .data-cell.uniq_val_8 {
+      border-left: solid 15px #6699ff;
+      border-bottom: solid 3px #6699ff;
+    }
+    .data-cell.uniq_val_9 {
+      border-left: solid 15px #66ff00;
+      border-bottom: solid 3px #66ff00;
+    }
+    .data-cell.uniq_val_10 {
+      border-left: solid 15px #cccccc;
+      border-bottom: solid 3px #cccccc;
+    }
+    .data-cell.uniq_val_11 {
+      border-left: solid 15px #0033cc;
+      border-bottom: solid 3px #0033cc;
+    }
+    .data-cell.uniq_val_12 {
+      border-left: solid 15px #ffcc99;
+      border-bottom: solid 3px #ffcc99;
+    }
+    .data-cell.uniq_val_13 {
+      border-left: solid 15px #330000;
+      border-bottom: solid 3px #330000;
+    }
+    .data-cell.uniq_val_14 {
+      border-left: solid 15px #006600;
+      border-bottom: solid 3px #006600;
+    }
+    .data-cell.uniq_val_15 {
+      border-left: solid 15px #009933;
+      border-bottom: solid 3px #009933;
+    }
+    .data-cell.uniq_val_16 {
+      border-left: solid 15px #006666;
+      border-bottom: solid 3px #006666;
+    }
+    .data-cell.uniq_val_17 {
+      border-left: solid 15px #000033;
+      border-bottom: solid 3px #000033;
+    }
+    .data-cell.uniq_val_18 {
+      border-left: solid 15px #99ff00;
+      border-bottom: solid 3px #99ff00;
+    }
+    .data-cell.uniq_val_19 {
+      border-left: solid 15px #99cc33;
+      border-bottom: solid 3px #99cc33;
+    }
+    .data-cell.uniq_val_20 {
+      border-left: solid 15px #990066;
+      border-bottom: solid 3px #990066;
+    }
+    .data-cell.uniq_val_21 {
+      border-left: solid 15px #3333cc;
+      border-bottom: solid 3px #3333cc;
+    }
+    .data-cell.uniq_val_22 {
+      border-left: solid 15px #cccc66;
+      border-bottom: solid 3px #cccc66;
+    }
+    .data-cell.uniq_val_23 {
+      border-left: solid 15px #00cc00;
+      border-bottom: solid 3px #00cc00;
+    }
+    .data-cell.uniq_val_24 {
+      border-left: solid 15px #33ffff;
+      border-bottom: solid 3px #33ffff;
+    }
+    .data-cell.uniq_val_25 {
+      border-left: solid 15px #66cccc;
+      border-bottom: solid 3px #66cccc;
+    }
+    .data-cell.uniq_val_26 {
+      border-left: solid 15px #666666;
+      border-bottom: solid 3px #666666;
+    }
+    .data-cell.uniq_val_27 {
+      border-left: solid 15px #333300;
+      border-bottom: solid 3px #333300;
+    }
+    .data-cell.uniq_val_28 {
+      border-left: solid 15px #cc99ff;
+      border-bottom: solid 3px #cc99ff;
+    }
+    .data-cell.uniq_val_29 {
+      border-left: solid 15px #ffffcc;
+      border-bottom: solid 3px #ffffcc;
+    }
+    .data-cell.uniq_val_30 {
+      border-left: solid 15px #66cc00;
+      border-bottom: solid 3px #66cc00;
+    }
+    .data-cell.uniq_val_31 {
+      border-left: solid 15px #3333ff;
+      border-bottom: solid 3px #3333ff;
+    }
+    .data-cell.uniq_val_32 {
+      border-left: solid 15px #009900;
+      border-bottom: solid 3px #009900;
+    }
+    .data-cell.uniq_val_33 {
+      border-left: solid 15px #33cccc;
+      border-bottom: solid 3px #33cccc;
+    }
+    .data-cell.uniq_val_34 {
+      border-left: solid 15px #ccff33;
+      border-bottom: solid 3px #ccff33;
+    }
+    .data-cell.uniq_val_35 {
+      border-left: solid 15px #ffff99;
+      border-bottom: solid 3px #ffff99;
+    }
+    .data-cell.uniq_val_36 {
+      border-left: solid 15px #339999;
+      border-bottom: solid 3px #339999;
+    }
+    .data-cell.uniq_val_37 {
+      border-left: solid 15px #00cc99;
+      border-bottom: solid 3px #00cc99;
+    }
+    .data-cell.uniq_val_38 {
+      border-left: solid 15px #ccff66;
+      border-bottom: solid 3px #ccff66;
+    }
+    .data-cell.uniq_val_39 {
+      border-left: solid 15px #999999;
+      border-bottom: solid 3px #999999;
+    }
+    .data-cell.uniq_val_40 {
+      border-left: solid 15px #33ff33;
+      border-bottom: solid 3px #33ff33;
+    }
+    .data-cell.uniq_val_41 {
+      border-left: solid 15px #660066;
+      border-bottom: solid 3px #660066;
+    }
+    .data-cell.uniq_val_42 {
+      border-left: solid 15px #00ff66;
+      border-bottom: solid 3px #00ff66;
+    }
+    .data-cell.uniq_val_43 {
+      border-left: solid 15px #ff0099;
+      border-bottom: solid 3px #ff0099;
+    }
+    .data-cell.uniq_val_44 {
+      border-left: solid 15px #3399ff;
+      border-bottom: solid 3px #3399ff;
+    }
+    .data-cell.uniq_val_45 {
+      border-left: solid 15px #33cc00;
+      border-bottom: solid 3px #33cc00;
+    }
+    .data-cell.uniq_val_46 {
+      border-left: solid 15px #996666;
+      border-bottom: solid 3px #996666;
+    }
+    .data-cell.uniq_val_47 {
+      border-left: solid 15px #cc9933;
+      border-bottom: solid 3px #cc9933;
+    }
+    .data-cell.uniq_val_48 {
+      border-left: solid 15px #ff33ff;
+      border-bottom: solid 3px #ff33ff;
+    }
+    .data-cell.uniq_val_49 {
+      border-left: solid 15px #66cc33;
+      border-bottom: solid 3px #66cc33;
+    }
+    .data-cell.uniq_val_50 {
+      border-left: solid 15px #cc9966;
+      border-bottom: solid 3px #cc9966;
+    }
+    .data-cell.uniq_val_51 {
+      border-left: solid 15px #669966;
+      border-bottom: solid 3px #669966;
+    }
+    .data-cell.uniq_val_52 {
+      border-left: solid 15px #336633;
+      border-bottom: solid 3px #336633;
+    }
+    .data-cell.uniq_val_53 {
+      border-left: solid 15px #ff3300;
+      border-bottom: solid 3px #ff3300;
+    }
+    .data-cell.uniq_val_54 {
+      border-left: solid 15px #ffff00;
+      border-bottom: solid 3px #ffff00;
+    }
+    .data-cell.uniq_val_55 {
+      border-left: solid 15px #669933;
+      border-bottom: solid 3px #669933;
+    }
+    .data-cell.uniq_val_56 {
+      border-left: solid 15px #00ff33;
+      border-bottom: solid 3px #00ff33;
+    }
+    .data-cell.uniq_val_57 {
+      border-left: solid 15px #66ffff;
+      border-bottom: solid 3px #66ffff;
+    }
+    .data-cell.uniq_val_58 {
+      border-left: solid 15px #ffcc33;
+      border-bottom: solid 3px #ffcc33;
+    }
+    .data-cell.uniq_val_59 {
+      border-left: solid 15px #ff9999;
+      border-bottom: solid 3px #ff9999;
+    }
+    .data-cell.uniq_val_60 {
+      border-left: solid 15px #00cc66;
+      border-bottom: solid 3px #00cc66;
+    }
+    .data-cell.uniq_val_61 {
+      border-left: solid 15px #333366;
+      border-bottom: solid 3px #333366;
+    }
+    .data-cell.uniq_val_62 {
+      border-left: solid 15px #ccccff;
+      border-bottom: solid 3px #ccccff;
+    }
+    .data-cell.uniq_val_63 {
+      border-left: solid 15px #9900cc;
+      border-bottom: solid 3px #9900cc;
+    }
+    .data-cell.uniq_val_64 {
+      border-left: solid 15px #cccc99;
+      border-bottom: solid 3px #cccc99;
+    }
+    .data-cell.uniq_val_65 {
+      border-left: solid 15px #66ff66;
+      border-bottom: solid 3px #66ff66;
+    }
+    .data-cell.uniq_val_66 {
+      border-left: solid 15px #003300;
+      border-bottom: solid 3px #003300;
+    }
+    .data-cell.uniq_val_67 {
+      border-left: solid 15px #330099;
+      border-bottom: solid 3px #330099;
+    }
+    .data-cell.uniq_val_68 {
+      border-left: solid 15px #ff0066;
+      border-bottom: solid 3px #ff0066;
+    }
+    .data-cell.uniq_val_69 {
+      border-left: solid 15px #cccc00;
+      border-bottom: solid 3px #cccc00;
+    }
+    .data-cell.uniq_val_70 {
+      border-left: solid 15px #33ccff;
+      border-bottom: solid 3px #33ccff;
+    }
+    .data-cell.uniq_val_71 {
+      border-left: solid 15px #00ff99;
+      border-bottom: solid 3px #00ff99;
+    }
+    .data-cell.uniq_val_72 {
+      border-left: solid 15px #669999;
+      border-bottom: solid 3px #669999;
+    }
+    .data-cell.uniq_val_73 {
+      border-left: solid 15px #003366;
+      border-bottom: solid 3px #003366;
+    }
+    .data-cell.uniq_val_74 {
+      border-left: solid 15px #6666ff;
+      border-bottom: solid 3px #6666ff;
+    }
+    .data-cell.uniq_val_75 {
+      border-left: solid 15px #663366;
+      border-bottom: solid 3px #663366;
+    }
+    .data-cell.uniq_val_76 {
+      border-left: solid 15px #999933;
+      border-bottom: solid 3px #999933;
+    }
+    .data-cell.uniq_val_77 {
+      border-left: solid 15px #cc6633;
+      border-bottom: solid 3px #cc6633;
+    }
+    .data-cell.uniq_val_78 {
+      border-left: solid 15px #ff3366;
+      border-bottom: solid 3px #ff3366;
+    }
+    .data-cell.uniq_val_79 {
+      border-left: solid 15px #000000;
+      border-bottom: solid 3px #000000;
+    }
+    .data-cell.uniq_val_80 {
+      border-left: solid 15px #9999ff;
+      border-bottom: solid 3px #9999ff;
+    }
+    .data-cell.uniq_val_81 {
+      border-left: solid 15px #ff00ff;
+      border-bottom: solid 3px #ff00ff;
+    }
+    .data-cell.uniq_val_82 {
+      border-left: solid 15px #660033;
+      border-bottom: solid 3px #660033;
+    }
+    .data-cell.uniq_val_83 {
+      border-left: solid 15px #ffccff;
+      border-bottom: solid 3px #ffccff;
+    }
+    .data-cell.uniq_val_84 {
+      border-left: solid 15px #99cc00;
+      border-bottom: solid 3px #99cc00;
+    }
+    .data-cell.uniq_val_85 {
+      border-left: solid 15px #cc33cc;
+      border-bottom: solid 3px #cc33cc;
+    }
+    .data-cell.uniq_val_86 {
+      border-left: solid 15px #cc3300;
+      border-bottom: solid 3px #cc3300;
+    }
+    .data-cell.uniq_val_87 {
+      border-left: solid 15px #0000cc;
+      border-bottom: solid 3px #0000cc;
+    }
+    .data-cell.uniq_val_88 {
+      border-left: solid 15px #cc6699;
+      border-bottom: solid 3px #cc6699;
+    }
+    .data-cell.uniq_val_89 {
+      border-left: solid 15px #339966;
+      border-bottom: solid 3px #339966;
+    }
+    .data-cell.uniq_val_90 {
+      border-left: solid 15px #ffff66;
+      border-bottom: solid 3px #ffff66;
+    }
+    .data-cell.uniq_val_91 {
+      border-left: solid 15px #cc3366;
+      border-bottom: solid 3px #cc3366;
+    }
+    .data-cell.uniq_val_92 {
+      border-left: solid 15px #006699;
+      border-bottom: solid 3px #006699;
+    }
+    .data-cell.uniq_val_93 {
+      border-left: solid 15px #006633;
+      border-bottom: solid 3px #006633;
+    }
+    .data-cell.uniq_val_94 {
+      border-left: solid 15px #000066;
+      border-bottom: solid 3px #000066;
+    }
+    .data-cell.uniq_val_95 {
+      border-left: solid 15px #6666cc;
+      border-bottom: solid 3px #6666cc;
+    }
+    .data-cell.uniq_val_96 {
+      border-left: solid 15px #6633ff;
+      border-bottom: solid 3px #6633ff;
+    }
+    .data-cell.uniq_val_97 {
+      border-left: solid 15px #99cc66;
+      border-bottom: solid 3px #99cc66;
+    }
+    .data-cell.uniq_val_98 {
+      border-left: solid 15px #cc9900;
+      border-bottom: solid 3px #cc9900;
+    }
+    .data-cell.uniq_val_99 {
+      border-left: solid 15px #99ff99;
+      border-bottom: solid 3px #99ff99;
+    }
+    .data-cell.uniq_val_100 {
+      border-left: solid 15px #666699;
+      border-bottom: solid 3px #666699;
+    }
+    .data-cell.uniq_val_101 {
+      border-left: solid 15px #cc3333;
+      border-bottom: solid 3px #cc3333;
+    }
+    .data-cell.uniq_val_102 {
+      border-left: solid 15px #330066;
+      border-bottom: solid 3px #330066;
+    }
+    .data-cell.uniq_val_103 {
+      border-left: solid 15px #9900ff;
+      border-bottom: solid 3px #9900ff;
+    }
+    .data-cell.uniq_val_104 {
+      border-left: solid 15px #cc00cc;
+      border-bottom: solid 3px #cc00cc;
+    }
+    .data-cell.uniq_val_105 {
+      border-left: solid 15px #ff66cc;
+      border-bottom: solid 3px #ff66cc;
+    }
+    .data-cell.uniq_val_106 {
+      border-left: solid 15px #660000;
+      border-bottom: solid 3px #660000;
+    }
+    .data-cell.uniq_val_107 {
+      border-left: solid 15px #ccffcc;
+      border-bottom: solid 3px #ccffcc;
+    }
+    .data-cell.uniq_val_108 {
+      border-left: solid 15px #990033;
+      border-bottom: solid 3px #990033;
+    }
+    .data-cell.uniq_val_109 {
+      border-left: solid 15px #336666;
+      border-bottom: solid 3px #336666;
+    }
+    .data-cell.uniq_val_110 {
+      border-left: solid 15px #6600cc;
+      border-bottom: solid 3px #6600cc;
+    }
+    .data-cell.uniq_val_111 {
+      border-left: solid 15px #cc00ff;
+      border-bottom: solid 3px #cc00ff;
+    }
+    .data-cell.uniq_val_112 {
+      border-left: solid 15px #999966;
+      border-bottom: solid 3px #999966;
+    }
+    .data-cell.uniq_val_113 {
+      border-left: solid 15px #000099;
+      border-bottom: solid 3px #000099;
+    }
+    .data-cell.uniq_val_114 {
+      border-left: solid 15px #996600;
+      border-bottom: solid 3px #996600;
+    }
+    .data-cell.uniq_val_115 {
+      border-left: solid 15px #cc0099;
+      border-bottom: solid 3px #cc0099;
+    }
+    .data-cell.uniq_val_116 {
+      border-left: solid 15px #339900;
+      border-bottom: solid 3px #339900;
+    }
+    .data-cell.uniq_val_117 {
+      border-left: solid 15px #993399;
+      border-bottom: solid 3px #993399;
+    }
+    .data-cell.uniq_val_118 {
+      border-left: solid 15px #00ffcc;
+      border-bottom: solid 3px #00ffcc;
+    }
+    .data-cell.uniq_val_119 {
+      border-left: solid 15px #ff33cc;
+      border-bottom: solid 3px #ff33cc;
+    }
+    .data-cell.uniq_val_120 {
+      border-left: solid 15px #99ff66;
+      border-bottom: solid 3px #99ff66;
+    }
+    .data-cell.uniq_val_121 {
+      border-left: solid 15px #99ccff;
+      border-bottom: solid 3px #99ccff;
+    }
+    .data-cell.uniq_val_122 {
+      border-left: solid 15px #99cccc;
+      border-bottom: solid 3px #99cccc;
+    }
+    .data-cell.uniq_val_123 {
+      border-left: solid 15px #669900;
+      border-bottom: solid 3px #669900;
+    }
+    .data-cell.uniq_val_124 {
+      border-left: solid 15px #cc6600;
+      border-bottom: solid 3px #cc6600;
+    }
+    .data-cell.uniq_val_125 {
+      border-left: solid 15px #cc3399;
+      border-bottom: solid 3px #cc3399;
+    }
+    .data-cell.uniq_val_126 {
+      border-left: solid 15px #333399;
+      border-bottom: solid 3px #333399;
+    }
+    .data-cell.uniq_val_127 {
+      border-left: solid 15px #660099;
+      border-bottom: solid 3px #660099;
+    }
+    .data-cell.uniq_val_128 {
+      border-left: solid 15px #ccff99;
+      border-bottom: solid 3px #ccff99;
+    }
+    .data-cell.uniq_val_129 {
+      border-left: solid 15px #666600;
+      border-bottom: solid 3px #666600;
+    }
+    .data-cell.uniq_val_130 {
+      border-left: solid 15px #993333;
+      border-bottom: solid 3px #993333;
+    }
+    .data-cell.uniq_val_131 {
+      border-left: solid 15px #33ff99;
+      border-bottom: solid 3px #33ff99;
+    }
+    .data-cell.uniq_val_132 {
+      border-left: solid 15px #999900;
+      border-bottom: solid 3px #999900;
+    }
+    .data-cell.uniq_val_133 {
+      border-left: solid 15px #3399cc;
+      border-bottom: solid 3px #3399cc;
+    }
+    .data-cell.uniq_val_134 {
+      border-left: solid 15px #0066ff;
+      border-bottom: solid 3px #0066ff;
+    }
+    .data-cell.uniq_val_135 {
+      border-left: solid 15px #cc0066;
+      border-bottom: solid 3px #cc0066;
+    }
+    .data-cell.uniq_val_136 {
+      border-left: solid 15px #ff3333;
+      border-bottom: solid 3px #ff3333;
+    }
+    .data-cell.uniq_val_137 {
+      border-left: solid 15px #00ccff;
+      border-bottom: solid 3px #00ccff;
+    }
+    .data-cell.uniq_val_138 {
+      border-left: solid 15px #cc0000;
+      border-bottom: solid 3px #cc0000;
+    }
+    .data-cell.uniq_val_139 {
+      border-left: solid 15px #33cc99;
+      border-bottom: solid 3px #33cc99;
+    }
+    .data-cell.uniq_val_140 {
+      border-left: solid 15px #33ffcc;
+      border-bottom: solid 3px #33ffcc;
+    }
+    .data-cell.uniq_val_141 {
+      border-left: solid 15px #663333;
+      border-bottom: solid 3px #663333;
+    }
+    .data-cell.uniq_val_142 {
+      border-left: solid 15px #9966cc;
+      border-bottom: solid 3px #9966cc;
+    }
+    .data-cell.uniq_val_143 {
+      border-left: solid 15px #ff6600;
+      border-bottom: solid 3px #ff6600;
+    }
+    .data-cell.uniq_val_144 {
+      border-left: solid 15px #0033ff;
+      border-bottom: solid 3px #0033ff;
+    }
+    .data-cell.uniq_val_145 {
+      border-left: solid 15px #663300;
+      border-bottom: solid 3px #663300;
+    }
+    .data-cell.uniq_val_146 {
+      border-left: solid 15px #66ff99;
+      border-bottom: solid 3px #66ff99;
+    }
+    .data-cell.uniq_val_147 {
+      border-left: solid 15px #ffcc00;
+      border-bottom: solid 3px #ffcc00;
+    }
+    .data-cell.uniq_val_148 {
+      border-left: solid 15px #330033;
+      border-bottom: solid 3px #330033;
+    }
+    .data-cell.uniq_val_149 {
+      border-left: solid 15px #3300cc;
+      border-bottom: solid 3px #3300cc;
+    }
+    .data-cell.uniq_val_150 {
+      border-left: solid 15px #cc33ff;
+      border-bottom: solid 3px #cc33ff;
+    }
+    .data-cell.uniq_val_151 {
+      border-left: solid 15px #ccff00;
+      border-bottom: solid 3px #ccff00;
+    }
+    .data-cell.uniq_val_152 {
+      border-left: solid 15px #33ff66;
+      border-bottom: solid 3px #33ff66;
+    }
+    .data-cell.uniq_val_153 {
+      border-left: solid 15px #66ff33;
+      border-bottom: solid 3px #66ff33;
+    }
+    .data-cell.uniq_val_154 {
+      border-left: solid 15px #003333;
+      border-bottom: solid 3px #003333;
+    }
+    .data-cell.uniq_val_155 {
+      border-left: solid 15px #993366;
+      border-bottom: solid 3px #993366;
+    }
+    .data-cell.uniq_val_156 {
+      border-left: solid 15px #6600ff;
+      border-bottom: solid 3px #6600ff;
+    }
+    .data-cell.uniq_val_157 {
+      border-left: solid 15px #00cccc;
+      border-bottom: solid 3px #00cccc;
+    }
+    .data-cell.uniq_val_158 {
+      border-left: solid 15px #ff9900;
+      border-bottom: solid 3px #ff9900;
+    }
+    .data-cell.uniq_val_159 {
+      border-left: solid 15px #ff66ff;
+      border-bottom: solid 3px #ff66ff;
+    }
+    .data-cell.uniq_val_160 {
+      border-left: solid 15px #003399;
+      border-bottom: solid 3px #003399;
+    }
+    .data-cell.uniq_val_161 {
+      border-left: solid 15px #ff0033;
+      border-bottom: solid 3px #ff0033;
+    }
+    .data-cell.uniq_val_162 {
+      border-left: solid 15px #9999cc;
+      border-bottom: solid 3px #9999cc;
+    }
+    .data-cell.uniq_val_163 {
+      border-left: solid 15px #ff99ff;
+      border-bottom: solid 3px #ff99ff;
+    }
+    .data-cell.uniq_val_164 {
+      border-left: solid 15px #ff0000;
+      border-bottom: solid 3px #ff0000;
+    }
+    .data-cell.uniq_val_165 {
+      border-left: solid 15px #336699;
+      border-bottom: solid 3px #336699;
+    }
+    .data-cell.uniq_val_166 {
+      border-left: solid 15px #ff99cc;
+      border-bottom: solid 3px #ff99cc;
+    }
+    .data-cell.uniq_val_167 {
+      border-left: solid 15px #ff9966;
+      border-bottom: solid 3px #ff9966;
+    }
+    .data-cell.uniq_val_168 {
+      border-left: solid 15px #66cc66;
+      border-bottom: solid 3px #66cc66;
+    }
+    .data-cell.uniq_val_169 {
+      border-left: solid 15px #ff3399;
+      border-bottom: solid 3px #ff3399;
+    }
+    .data-cell.uniq_val_170 {
+      border-left: solid 15px #990099;
+      border-bottom: solid 3px #990099;
+    }
+    .data-cell.uniq_val_171 {
+      border-left: solid 15px #33ff00;
+      border-bottom: solid 3px #33ff00;
+    }
+    .data-cell.uniq_val_172 {
+      border-left: solid 15px #cc6666;
+      border-bottom: solid 3px #cc6666;
+    }
+    .data-cell.uniq_val_173 {
+      border-left: solid 15px #336600;
+      border-bottom: solid 3px #336600;
+    }
+    .data-cell.uniq_val_174 {
+      border-left: solid 15px #00ff00;
+      border-bottom: solid 3px #00ff00;
+    }
+    .data-cell.uniq_val_175 {
+      border-left: solid 15px #009999;
+      border-bottom: solid 3px #009999;
+    }
+    .data-cell.uniq_val_176 {
+      border-left: solid 15px #99ffcc;
+      border-bottom: solid 3px #99ffcc;
+    }
+    .data-cell.uniq_val_177 {
+      border-left: solid 15px #9933cc;
+      border-bottom: solid 3px #9933cc;
+    }
+    .data-cell.uniq_val_178 {
+      border-left: solid 15px #3300ff;
+      border-bottom: solid 3px #3300ff;
+    }
+    .data-cell.uniq_val_179 {
+      border-left: solid 15px #ff6699;
+      border-bottom: solid 3px #ff6699;
+    }
+    .data-cell.uniq_val_180 {
+      border-left: solid 15px #00cc33;
+      border-bottom: solid 3px #00cc33;
+    }
+    .data-cell.uniq_val_181 {
+      border-left: solid 15px #ffcc66;
+      border-bottom: solid 3px #ffcc66;
+    }
+    .data-cell.uniq_val_182 {
+      border-left: solid 15px #990000;
+      border-bottom: solid 3px #990000;
+    }
+    .data-cell.uniq_val_183 {
+      border-left: solid 15px #cc66ff;
+      border-bottom: solid 3px #cc66ff;
+    }
+    .data-cell.uniq_val_184 {
+      border-left: solid 15px #ff9933;
+      border-bottom: solid 3px #ff9933;
+    }
+    .data-cell.uniq_val_185 {
+      border-left: solid 15px #cc66cc;
+      border-bottom: solid 3px #cc66cc;
+    }
+    .data-cell.uniq_val_186 {
+      border-left: solid 15px #ff00cc;
+      border-bottom: solid 3px #ff00cc;
+    }
+    .data-cell.uniq_val_187 {
+      border-left: solid 15px #666633;
+      border-bottom: solid 3px #666633;
+    }
+    .data-cell.uniq_val_188 {
+      border-left: solid 15px #cc0033;
+      border-bottom: solid 3px #cc0033;
+    }
+    .data-cell.uniq_val_189 {
+      border-left: solid 15px #3366ff;
+      border-bottom: solid 3px #3366ff;
+    }
+    .data-cell.uniq_val_190 {
+      border-left: solid 15px #3366cc;
+      border-bottom: solid 3px #3366cc;
+    }
+    .data-cell.uniq_val_191 {
+      border-left: solid 15px #66ffcc;
+      border-bottom: solid 3px #66ffcc;
+    }
+    .data-cell.uniq_val_192 {
+      border-left: solid 15px #9966ff;
+      border-bottom: solid 3px #9966ff;
+    }
+    .data-cell.uniq_val_193 {
+      border-left: solid 15px #66ccff;
+      border-bottom: solid 3px #66ccff;
+    }
+    .data-cell.uniq_val_194 {
+      border-left: solid 15px #ff6633;
+      border-bottom: solid 3px #ff6633;
+    }
+    .data-cell.uniq_val_195 {
+      border-left: solid 15px #66cc99;
+      border-bottom: solid 3px #66cc99;
+    }
+    .data-cell.uniq_val_196 {
+      border-left: solid 15px #663399;
+      border-bottom: solid 3px #663399;
+    }
+    .data-cell.uniq_val_197 {
+      border-left: solid 15px #993300;
+      border-bottom: solid 3px #993300;
+    }
+    .data-cell.uniq_val_198 {
+      border-left: solid 15px #0099ff;
+      border-bottom: solid 3px #0099ff;
+    }
+    .data-cell.uniq_val_199 {
+      border-left: solid 15px #9933ff;
+      border-bottom: solid 3px #9933ff;
+    }
+    .data-cell.uniq_val_200 {
+      border-left: solid 15px #33cc33;
+      border-bottom: solid 3px #33cc33;
+    }
+    .data-cell.uniq_val_201 {
+      border-left: solid 15px #ffff33;
+      border-bottom: solid 3px #ffff33;
+    }
+    .data-cell.uniq_val_202 {
+      border-left: solid 15px #33cc66;
+      border-bottom: solid 3px #33cc66;
+    }
+    .data-cell.uniq_val_203 {
+      border-left: solid 15px #99ffff;
+      border-bottom: solid 3px #99ffff;
+    }
+    .data-cell.uniq_val_204 {
+      border-left: solid 15px #339933;
+      border-bottom: solid 3px #339933;
+    }
+    .data-cell.uniq_val_205 {
+      border-left: solid 15px #00ffff;
+      border-bottom: solid 3px #00ffff;
+    }
+    .data-cell.uniq_val_206 {
+      border-left: solid 15px #ffcccc;
+      border-bottom: solid 3px #ffcccc;
+    }
+    .data-cell.uniq_val_207 {
+      border-left: solid 15px #99ff33;
+      border-bottom: solid 3px #99ff33;
+    }
+    .data-cell.uniq_val_208 {
+      border-left: solid 15px #6633cc;
+      border-bottom: solid 3px #6633cc;
+    }
+    .data-cell.uniq_val_209 {
+      border-left: solid 15px #996633;
+      border-bottom: solid 3px #996633;
+    }
+    .data-cell.uniq_val_210 {
+      border-left: solid 15px #333333;
+      border-bottom: solid 3px #333333;
+    }
+    .data-cell.uniq_val_211 {
+      border-left: solid 15px #cccc33;
+      border-bottom: solid 3px #cccc33;
+    }
+    .data-cell.uniq_val_212 {
+      border-left: solid 15px #cc99cc;
+      border-bottom: solid 3px #cc99cc;
+    }
+    .data-cell.uniq_val_213 {
+      border-left: solid 15px #cc9999;
+      border-bottom: solid 3px #cc9999;
+    }
+    .data-cell.uniq_val_214 {
+      border-left: solid 15px #ccffff;
+      border-bottom: solid 3px #ccffff;
+    }
+
+
   </style>
 </head>
 <body class="container-fluid">
@@ -109,7 +1011,7 @@
           <option value="<%= AttributeDefinition.AttributeName %>" />
         <% } %>
       </datalist>
-      <table class="table table-bordered">
+      <table class="table table-bordered table-responsive filter-table">
         <tbody>
           <tr>
             <th>
@@ -145,7 +1047,7 @@
             <th>
               Filter
               <div style="margin-top: 1em">
-                <button id="add-filter" class="btn btn-secondary">Add Filter</button>
+                <button id="add-filter" type="button" class="btn btn-secondary">Add Filter</button>
               </div>
             </th>
             <td>
@@ -153,7 +1055,7 @@
                 <tbody>
                   <tr>
                     <td style="width: 95px;">
-                      <button type="button" onclick="removeFilter(this)" class="filter-remove btn btn-danger">Remove</button>
+                      <button type="button" onclick="removeFilter(this, event)" class="filter-remove btn btn-danger">Remove</button>
                     </td>
                     <td style="width: 300px">
                       <input
@@ -188,13 +1090,49 @@
         </tbody>
       </table>
       <input id="filters" name="filters" type="hidden" />
-
       <div class="row">
-        <div class="col-md-6">
-          <button type="submit" class="btn btn-primary">Search</button>
-        </div>
+        <div class="col-md-8 form-inline">
+            <label class="form-label">
+            Omitted props:
+              <input id="omit" class="form-control ml-1" name="omit" type="text" value="<%= query.omit || '' %>" />
+            </label>
+            <label class="form-label ml-1">
+            Picked props:
+              <input id="pick" class="form-control ml-1" name="pick" type="text" value="<%= query.pick || '' %>" />
+            </label>
+            <label class="form-label ml-1">
+            Sorted by:
+              <input id="sort" class="form-control ml-1" name="sort" type="text" value="<%= query.sort || '' %>" />
+            </label>
+            <div class="form-check form-check-inline ml-1">
+              <input class="form-check-input sort-direction" type="radio" type="radio" id="asc-radio" name="direction" value="asc" <% if (query.direction !=='desc' ) { %>
+              checked<% } %>>
+              <label class="form-check-label" for="asc-radio">Ascending</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input sort-direction" type="radio" type="radio" id="desc-radio" name="direction" value="desc" <% if
+                (query.direction ==='desc' ) { %>
+              checked<% } %>>
+                <label class="form-check-label" for="desc-radio">Descending</label>
+            </div>
 
-        <div class="col-md-6 pagination-container d-none">
+            <label class="form-check-label ml-1">
+              <input class="form-check-input" type="checkbox" id="hidegsi" name="hidegsi" value="true" <% if (query.hidegsi === 'true') { %>
+              checked<% } %>>
+                <label class="form-check-label" for="hidegsi">Hide GSIs</label>
+            </label>
+
+            <label class="form-check-label ml-1">
+              <input class="form-check-input" type="checkbox" id="showcolors" name="showcolors" value="true" <% if (query.showcolors==='true'
+                ) { %>
+              checked<% } %>>
+                <label class="form-check-label" for="showcolors">Show colors</label>
+            </label>
+              
+            <button type="submit" class="btn btn-primary ml-1" accesskey="s">Search</button>
+            <button type="button" id="reset" class="btn btn-secondary ml-1" accesskey="r">Reset</button>
+        </div>
+        <div class="col-md-4 pagination-container d-none">
             <nav style="float: right">
               <ul class="pagination" style="margin: 0">
                 <li class="page-item page-item-previous disabled">
@@ -217,7 +1155,7 @@
     const JSONRender = value => new JSONFormatter.default(value).render()
 
     const form = document.querySelector('#form')
-    form.addEventListener('submit', () => {
+    form.addEventListener('submit', (event, extra) => {
       const filters = {}
 
       document.querySelectorAll('#filters-table tr').forEach((filterRow) => {
@@ -258,6 +1196,33 @@
     document.querySelector('#add-filter').addEventListener('click', (event) => {
       event.preventDefault()
       addFilter()
+    })
+
+    document.getElementById('reset').addEventListener('click', (event) => {
+      for (const filterBtn of document.querySelectorAll('#filters-table button.filter-remove')) {
+        removeFilter(filterBtn, {})
+      }
+
+      document.getElementById('omit').value = ''
+      document.getElementById('filters').value = ''
+      document.getElementById('pick').value = ''
+      document.getElementById('sort').value = ''
+      document.getElementById('hidegsi').checked = true
+      document.getElementById('showcolors').checked = false
+      document.querySelector('.sort-direction[value="asc"]').checked = true
+      $('#form button[type="submit"]').trigger('click')
+    })
+    
+    const sortElements = [...document.querySelectorAll('.sort-direction')].map(el => el.addEventListener('click', (event) => {
+       $('#form button[type="submit"]').trigger('click')
+    }))
+
+    document.getElementById('hidegsi').addEventListener('change', (event) => {
+      $('#form button[type="submit"]').trigger('click')
+    })
+
+    document.getElementById('showcolors').addEventListener('change', (event) => {
+      $('#form button[type="submit"]').trigger('click')
     })
 
     function requireIndexFilters () {
@@ -365,7 +1330,7 @@
       addFilter(rangeKey, values, false, ['=', '<', '<=', '>', '>=', 'BETWEEN', 'begins_with'])
     }
 
-    function removeFilter (node) {
+    function removeFilter (node, event) {
       // prevent removal of the last filter row, instead, just clear it out
       if (document.querySelectorAll('#filters-table tr').length === 1) {
         const filterRow = document.querySelector('#filters-table tr')
@@ -373,6 +1338,11 @@
         filterRow.querySelector('.filter-row-value').value = ''
       } else {
         node.closest('tr').remove()
+      }
+
+      // Shift click on remove filter button to search right away
+      if (event.shiftKey) {
+        $('#form button[type="submit"]').trigger('click')
       }
     }
 
@@ -383,37 +1353,143 @@
     }
 
     function renderItems(data) {
-      $('#actions-row').append(data.uniqueKeys.map(key => '<td>' + key + '</td>'))
+      $('#actions-row').append(data.uniqueKeys.map(key => '<th>' + key + '</th>'))
+
+      // Add sort by clicking on table headers
+      $('#actions-row th').click((event) => {
+        const sortEl = document.getElementById('sort')
+        const existingVal = sortEl.value
+        sortEl.value = event.target.innerText.trim()
+
+        const [ascRadio, descRadio] = document.querySelectorAll('.sort-direction')
+
+        if(existingVal === sortEl.value) {
+          if (ascRadio.checked) {
+            descRadio.checked = true
+          } else {
+            ascRadio.checked = true
+          }
+        } else {
+          ascRadio.checked = true
+          descRadio.checked = false
+        }
+
+        $('#form button[type="submit"]').trigger('click')
+      })
 
       if (data.Items.length) {
+        const allValues = data.Items.flatMap(item => data.uniqueKeys.map(k => item[k]))
+        const allWithMoreThanXRepeating = allValues.filter(val => allValues.filter(val2 => val2 === val).length > 1 && val !== undefined && val !== null)
+        const uniqueValues = allWithMoreThanXRepeating.filter((val, i) => allWithMoreThanXRepeating.indexOf(val) === i)
+
         $('#items-container').append(data.Items.map(item => {
           const viewUrl = '/tables/<%= Table.TableName %>/items/' + encodeURIComponent(Object.values(item.__key).join(','))
-          const rowEl = $('<tr><td><a href="' + viewUrl + '">View</a></td></tr>')
+          const rowEl = $(`<tr><td class="view"><a href="${viewUrl}">View</a> <button type="button" data-entity-url="${viewUrl}" class="delete-item btn btn-danger">DELETE</button></td></tr>`)
 
           for (const column of data.uniqueKeys) {
-            const columnEl = $('<td></td>')
+            const columnEl = $('<td class="max-width"></td>')
 
             const value = item[column]
             let wrapperEl = null
 
-            if (Number.isInteger(value) && value >= 0) {
-              let dateValue
-              try {
-                dateValue = new Date(value).toISOString()
-              } catch (error) {
-                dateValue = error.message
-              }
+            // removed, because we use ISO8601 for dates, not unix timestamps as numbers
+            // if (Number.isInteger(value) && value >= 0) {
+            //   let dateValue
+            //   try {
+            //     dateValue = new Date(value).toISOString()
+            //   } catch (error) {
+            //     dateValue = error.message
+            //   }
 
-              wrapperEl = $('<abbr data-toggle="tooltip" data-placement="top" title="' + dateValue + '"></abbr>')
-            } else {
-              wrapperEl = $('<div class="preformatted"></div>')
+            //   wrapperEl = $('<abbr class="data-cell" data-toggle="tooltip" data-placement="top" title="' + value + '"></abbr>')
+            // } else {
+            // Add some extra properties to hold data
+
+
+            // mark values containing date with that class and add class if that date is in the future
+            const ISO8601_REGEX = /(\d{4}-\d\d-\d\d)(T\d\d:\d\d:\d\d\.\d\d\dZ$)?/;
+            const dateMatches = ISO8601_REGEX.exec(value)
+            let dateValue = value
+            if (dateMatches) {
+              dateValue = dateMatches[0]
             }
+
+            const isDate = !!dateMatches
+            const isFuture = new Date(dateValue) > new Date()
+
+            const isDateClass = isDate ? 'date' : ''
+            const isFutureClass = isDate && isFuture ? 'future' : ''
+            const uniqueValueClass  = location.search.includes('showcolors=true')  ? 'uniq_val_'+ uniqueValues.indexOf(value) : ''
+            const classes = [isDateClass, isFutureClass, uniqueValueClass].join(' ')
+
+            wrapperEl = $(`<div class="preformatted data-cell ${classes}" data-toggle="tooltip" data-placement="top" key="` + column + '" cell-value="' + value + '" title="' + column +': ' + value + '"></div>')
+            // }
 
             rowEl.append(columnEl.append(wrapperEl.append(JSONRender(value))))
           }
 
           return rowEl
         }))
+
+        // delete item
+        $('.delete-item').click((event) => {
+          if (event.shiftKey) {
+            const entityUrl = event.currentTarget.getAttribute('data-entity-url')
+            fetch(entityUrl, {
+              method: 'delete'
+            }).then((response) => {
+              if (response.ok) {
+                window.location.reload()
+              }
+            }).catch((error) => {
+              console.error(error)
+              alert('There was an error.')
+            })
+          } else {
+            alert('Hold shift to delete.')
+          }
+        })
+
+        // copy value
+        // $('#items-container .data-cell').click((event) => {
+        //   if (event.shiftKey) {
+        //     const cellValue = event.currentTarget.getAttribute('cell-value')
+        //     navigator.clipboard.writeText(cellValue).then(() => {
+
+        //       Notification.requestPermission().then((permission) => {
+        //         // If the user accepts, let's create a notification
+        //         if (permission === "granted") {
+        //             const notification = new Notification(`Copied ${cellValue} to clipboard`);
+        //         }
+        //       });
+              
+        //     }, (err) => {
+        //       alert('failed to write to clipboard')
+        //     })
+        //   }
+        // })
+
+        // Double click on a cell value to add filter for that column and value
+        // searches right away
+        // Press control right away to only add filter without searching
+        $('#items-container .data-cell').dblclick((event) => {
+          addFilter()   
+          
+          const addedFilter = $('#filters-table tr:last')
+          
+          addedFilter.find('.filter-row-key').val(event.currentTarget.getAttribute('key'))
+          addedFilter.find('.filter-row-value').val(event.currentTarget.getAttribute('cell-value'))
+
+
+          if (!event.shiftKey) {
+
+            if (event.altKey) {
+              $('#form').attr("target", "_blank"); 
+            }
+
+            $('#form button[type="submit"]').trigger('click')
+          }
+        })
 
         if (data.pageNum > 1) {
           $('.page-link-previous')
@@ -427,7 +1503,7 @@
           $('.page-item-next').removeClass('disabled')
         }
 
-        const rangeFrom = ((data.pageNum - 1) * 25) + 1
+        const rangeFrom = ((data.pageNum - 1) * data.pageSize) + 1
         const rangeTo = rangeFrom + (data.Items.length - 1)
         $('.item-count').append(' (showing ' + rangeFrom + ' - ' + rangeTo + ')')
 
