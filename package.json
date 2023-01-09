@@ -8,7 +8,7 @@
     "dev": "nodemon bin/dynamodb-admin.js",
     "start": "DYNAMO_ENDPOINT=http://localhost:3413 node bin/dynamodb-admin.js",
     "start:bapi:docker": "DYNAMO_ENDPOINT=http://localhost:3414 node bin/dynamodb-admin.js",
-    "start:oapi": "DYNAMO_ENDPOINT=http://localhost:5100 node bin/dynamodb-admin.js",
+    "start:oapi": "DYNAMO_ENDPOINT=http://localhost:5002 node bin/dynamodb-admin.js",
     "lint": "eslint --ext .js . && ejslint views",
     "fix": "eslint --ext .js --fix .",
     "test": "jest",
